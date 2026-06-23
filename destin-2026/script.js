@@ -97,7 +97,14 @@ const beachButton = document.getElementById("beach-button");
 const surfFlag = document.getElementById("surf-flag");
 const surfStatus = document.getElementById("surf-status");
 const surfDetail = document.getElementById("surf-detail");
+const midiPlayer = document.querySelector(".midi-player");
+const midiPlayButton = document.getElementById("midi-play");
+const midiStopButton = document.getElementById("midi-stop");
+const midiTitle = document.getElementById("midi-title");
 let currentBeachAlert = "";
+let midiContext = null;
+let midiLoopTimer = null;
+let midiIsPlaying = false;
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -305,6 +312,82 @@ async function loadDestinSurfVibe() {
   }
 }
 
+function midiNoteToFrequency(note) {
+  return 440 * (2 ** ((note - 69) / 12));
+}
+
+function scheduleMidiTone(context, note, start, duration, type, gainAmount) {
+  const osc = context.createOscillator();
+  const gain = context.createGain();
+  osc.type = type;
+  osc.frequency.setValueAtTime(midiNoteToFrequency(note), start);
+  gain.gain.setValueAtTime(0.0001, start);
+  gain.gain.exponentialRampToValueAtTime(gainAmount, start + 0.015);
+  gain.gain.exponentialRampToValueAtTime(0.0001, start + duration);
+  osc.connect(gain).connect(context.destination);
+  osc.start(start);
+  osc.stop(start + duration + 0.03);
+}
+
+function scheduleTropicalMidiLoop(context) {
+  const start = context.currentTime + 0.03;
+  const beat = 0.32;
+  const melody = [72, 74, 76, 79, 76, 74, 72, 69, 71, 72, 74, 76, 74, 71, 69, 67];
+  const bass = [48, 48, 55, 55, 50, 50, 57, 57];
+  const chords = [
+    [60, 64, 67],
+    [62, 65, 69],
+    [59, 62, 67],
+    [60, 64, 69]
+  ];
+
+  melody.forEach((note, index) => {
+    scheduleMidiTone(context, note, start + index * beat, beat * 0.72, "square", 0.035);
+  });
+
+  bass.forEach((note, index) => {
+    scheduleMidiTone(context, note, start + index * beat * 2, beat * 1.05, "triangle", 0.06);
+  });
+
+  chords.forEach((chord, chordIndex) => {
+    chord.forEach((note) => {
+      scheduleMidiTone(context, note, start + chordIndex * beat * 4, beat * 2.5, "triangle", 0.018);
+    });
+  });
+
+  midiLoopTimer = window.setTimeout(() => {
+    if (midiIsPlaying) scheduleTropicalMidiLoop(context);
+  }, beat * melody.length * 1000);
+}
+
+function stopMidiPlayer() {
+  midiIsPlaying = false;
+  if (midiLoopTimer) window.clearTimeout(midiLoopTimer);
+  midiLoopTimer = null;
+  if (midiContext) {
+    midiContext.close();
+    midiContext = null;
+  }
+  midiPlayer.classList.remove("is-playing");
+  midiTitle.textContent = "NOW PLAYING: LEGALLY DISTINCT PINA COLADA-ADJACENT BEACH MIDI";
+}
+
+function startMidiPlayer() {
+  if (midiIsPlaying) return;
+
+  const AudioContext = window.AudioContext || window.webkitAudioContext;
+  if (!AudioContext) {
+    midiTitle.textContent = "MIDI DEVICE NOT FOUND. PLEASE HUM INTO A COCONUT.";
+    return;
+  }
+
+  midiContext = new AudioContext();
+  midiIsPlaying = true;
+  midiPlayer.classList.add("is-playing");
+  midiTitle.textContent = "PLAYING: THE COCONUT MODEM LOUNGE LOOP";
+  scheduleTropicalMidiLoop(midiContext);
+}
+
 function playBeachSound() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!AudioContext) return;
@@ -394,6 +477,8 @@ setInterval(rotateStatusMessage, 9000);
 setInterval(renderTravelerBoard, 60000);
 
 beachAlertEl.addEventListener("animationiteration", rotateBeachAlert);
+midiPlayButton.addEventListener("click", startMidiPlayer);
+midiStopButton.addEventListener("click", stopMidiPlayer);
 beachButton.addEventListener("click", declareBeachEmergency);
 document.addEventListener("click", (event) => {
   if (event.target === beachButton) return;

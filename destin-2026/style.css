@@ -133,6 +133,83 @@ h1 {
   animation: marquee 13s linear infinite;
 }
 
+.midi-player {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) auto;
+  gap: 10px;
+  align-items: center;
+  max-width: 860px;
+  margin: 16px auto 0;
+  padding: 10px;
+  border: 3px outset var(--aqua);
+  background:
+    repeating-linear-gradient(90deg, rgba(255,255,255,.22) 0 7px, transparent 7px 14px),
+    #fef9ff;
+  box-shadow: 5px 5px 0 var(--pink);
+}
+
+.midi-screen {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  min-height: 38px;
+  padding: 8px 10px;
+  border: 3px inset #8eefff;
+  background: #151016;
+  color: var(--lime);
+  font-family: "Courier New", Courier, monospace;
+  font-size: clamp(.72rem, 1.8vw, .95rem);
+  font-weight: 900;
+  overflow: hidden;
+  text-align: left;
+  text-transform: uppercase;
+}
+
+.midi-screen span:last-child {
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.midi-light {
+  flex: 0 0 12px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #585858;
+  box-shadow: 0 0 0 2px rgba(255,255,255,.22);
+}
+
+.midi-player.is-playing .midi-light {
+  background: var(--lime);
+  box-shadow: 0 0 14px var(--lime);
+  animation: midi-blink .55s steps(2, end) infinite;
+}
+
+.midi-controls {
+  display: flex;
+  gap: 8px;
+}
+
+.midi-controls button {
+  min-height: 38px;
+  padding: 6px 10px;
+  border: 3px solid var(--ink);
+  background: var(--sun);
+  color: var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
+  box-shadow: 3px 3px 0 var(--pink);
+}
+
+.midi-controls button:hover,
+.midi-controls button:focus-visible {
+  transform: translate(-1px, -1px);
+  filter: saturate(1.4);
+}
+
 .countdown-card,
 .departures-board,
 .chaos-grid,
@@ -528,6 +605,11 @@ h1 {
   100% { filter: brightness(1); transform: rotateX(0deg); }
 }
 
+@keyframes midi-blink {
+  from { opacity: 1; }
+  to { opacity: .35; }
+}
+
 @media (max-width: 760px) {
   .countdown,
   .chaos-grid {
@@ -557,6 +639,14 @@ h1 {
   .departures-board__topline span {
     display: block;
     margin-top: 4px;
+  }
+
+  .midi-player {
+    grid-template-columns: 1fr;
+  }
+
+  .midi-controls {
+    justify-content: center;
   }
 
   .departures-row--header {
