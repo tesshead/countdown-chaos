@@ -80,30 +80,55 @@ function updateCountdown() {
   document.getElementById("hype-percent").textContent = `${hype}%`;
 }
 
-function playSeagullAlarm() {
+function playBeachSound() {
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!AudioContext) return;
 
   const context = new AudioContext();
   const master = context.createGain();
   master.gain.setValueAtTime(0.0001, context.currentTime);
-  master.gain.exponentialRampToValueAtTime(0.28, context.currentTime + 0.03);
-  master.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.85);
+  master.gain.exponentialRampToValueAtTime(0.34, context.currentTime + 0.12);
+  master.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 2.35);
   master.connect(context.destination);
 
-  [0, .18, .36].forEach((offset) => {
+  const noiseLength = Math.floor(context.sampleRate * 2.4);
+  const noiseBuffer = context.createBuffer(1, noiseLength, context.sampleRate);
+  const data = noiseBuffer.getChannelData(0);
+  for (let i = 0; i < noiseLength; i += 1) {
+    const fadeIn = Math.min(1, i / (context.sampleRate * .45));
+    const fadeOut = Math.min(1, (noiseLength - i) / (context.sampleRate * .7));
+    data[i] = (Math.random() * 2 - 1) * fadeIn * fadeOut;
+  }
+
+  const surf = context.createBufferSource();
+  const surfLowpass = context.createBiquadFilter();
+  const surfHighpass = context.createBiquadFilter();
+  const surfGain = context.createGain();
+  surf.buffer = noiseBuffer;
+  surfLowpass.type = "lowpass";
+  surfLowpass.frequency.value = 920;
+  surfHighpass.type = "highpass";
+  surfHighpass.frequency.value = 120;
+  surfGain.gain.setValueAtTime(0.0001, context.currentTime);
+  surfGain.gain.exponentialRampToValueAtTime(0.42, context.currentTime + .45);
+  surfGain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 2.35);
+  surf.connect(surfLowpass).connect(surfHighpass).connect(surfGain).connect(master);
+  surf.start();
+  surf.stop(context.currentTime + 2.45);
+
+  [0.32, 0.62].forEach((offset, index) => {
     const osc = context.createOscillator();
     const gain = context.createGain();
-    osc.type = "sawtooth";
-    osc.frequency.setValueAtTime(780, context.currentTime + offset);
-    osc.frequency.exponentialRampToValueAtTime(1450, context.currentTime + offset + .08);
-    osc.frequency.exponentialRampToValueAtTime(520, context.currentTime + offset + .2);
+    osc.type = "triangle";
+    osc.frequency.setValueAtTime(index ? 980 : 860, context.currentTime + offset);
+    osc.frequency.exponentialRampToValueAtTime(index ? 1380 : 1260, context.currentTime + offset + .11);
+    osc.frequency.exponentialRampToValueAtTime(index ? 740 : 680, context.currentTime + offset + .32);
     gain.gain.setValueAtTime(.0001, context.currentTime + offset);
-    gain.gain.exponentialRampToValueAtTime(.22, context.currentTime + offset + .025);
-    gain.gain.exponentialRampToValueAtTime(.0001, context.currentTime + offset + .24);
+    gain.gain.exponentialRampToValueAtTime(.12, context.currentTime + offset + .06);
+    gain.gain.exponentialRampToValueAtTime(.0001, context.currentTime + offset + .42);
     osc.connect(gain).connect(master);
     osc.start(context.currentTime + offset);
-    osc.stop(context.currentTime + offset + .26);
+    osc.stop(context.currentTime + offset + .45);
   });
 }
 
@@ -120,7 +145,7 @@ function launchFireworks(count = 26) {
 }
 
 function declareBeachEmergency() {
-  playSeagullAlarm();
+  playBeachSound();
   launchFireworks();
   document.body.classList.remove("shake");
   void document.body.offsetWidth;
