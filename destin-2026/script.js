@@ -26,7 +26,14 @@ const statusMessages = [
   "Pre-trip chaos is stretching in the hallway.",
   "Begin beach goblin transformation.",
   "This is not a drill. Hydrate and overreact.",
-  "IT IS GIRLS TRIP O'CLOCK. BE NORMAL? IMPOSSIBLE."
+  "IT IS GIRLS TRIP O'CLOCK. BE NORMAL? IMPOSSIBLE.",
+  "A packing cube somewhere just got nervous.",
+  "Snack logistics are becoming everyone's personality.",
+  "Someone is spiritually adding to cart.",
+  "The beach bag is calling from the future.",
+  "Forecast: dramatic entrances with scattered sunscreen.",
+  "Outfit discourse has requested a formal agenda.",
+  "The vacation spreadsheet is gaining sentience."
 ];
 
 const beachAlerts = [
@@ -39,7 +46,8 @@ const beachAlerts = [
   "BEACH ALERT * SNACK LOGISTICS HAVE ENTERED THEIR FINAL FORM *",
   "BEACH ALERT * CABANA DELUSIONS APPROACHING CRUISING ALTITUDE *",
   "BEACH ALERT * THE VIBES ARE NON-REFUNDABLE *",
-  "BEACH ALERT * SOMEONE IS ABOUT TO ASK WHAT ARE WE WEARING *"
+  "BEACH ALERT * SOMEONE IS ABOUT TO ASK WHAT ARE WE WEARING *",
+  "BEACH ALERT * GROUP CHAT INSTABILITY HAS REACHED VACATION-ADJACENT LEVELS *"
 ];
 
 // Update Tess later by replacing FLIGHT TBD with flight number/times and adding depart/arrive.
@@ -99,6 +107,15 @@ function rotateCopy() {
 
 function rotateBeachAlert() {
   beachAlertEl.textContent = randomItem(beachAlerts);
+}
+
+function rotateStatusMessage() {
+  if (Date.now() >= tripDate) {
+    document.getElementById("status").textContent = "IT IS GIRLS TRIP O'CLOCK. BE NORMAL? IMPOSSIBLE.";
+    return;
+  }
+
+  document.getElementById("status").textContent = randomItem(statusMessages);
 }
 
 function getTravelerStatus(traveler, now = Date.now()) {
@@ -183,14 +200,9 @@ function updateCountdown() {
   document.getElementById("minutes").textContent = pad(minutes);
   document.getElementById("seconds").textContent = pad(seconds);
 
-  let index = 0;
-  if (days <= 60) index = 1;
-  if (days <= 45) index = 2;
-  if (days <= 30) index = 3;
-  if (days <= 14) index = 4;
-  if (days <= 7) index = 5;
-  if (diff <= 0) index = 6;
-  document.getElementById("status").textContent = statusMessages[index];
+  if (diff <= 0) {
+    document.getElementById("status").textContent = "IT IS GIRLS TRIP O'CLOCK. BE NORMAL? IMPOSSIBLE.";
+  }
 
   const hype = calculateHype(days, diff);
   document.getElementById("hype-fill").style.width = `${hype}%`;
@@ -359,12 +371,14 @@ function declareBeachEmergency() {
 
 rotateCopy();
 rotateBeachAlert();
+rotateStatusMessage();
 renderTravelerBoard();
 loadDestinSurfVibe();
 updateCountdown();
 setInterval(updateCountdown, 1000);
 setInterval(rotateCopy, 10000);
 setInterval(rotateBeachAlert, 7000);
+setInterval(rotateStatusMessage, 9000);
 setInterval(renderTravelerBoard, 60000);
 
 beachButton.addEventListener("click", declareBeachEmergency);
