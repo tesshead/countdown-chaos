@@ -23,6 +23,7 @@ body {
   background:
     radial-gradient(circle at 18% 8%, rgba(214,168,77,.26), transparent 28%),
     radial-gradient(circle at 84% 18%, rgba(127,36,55,.18), transparent 24%),
+    radial-gradient(circle at 50% 104%, rgba(244,223,170,.16), transparent 34%),
     linear-gradient(180deg, rgba(15,28,16,.92), rgba(23,35,19,.86)),
     linear-gradient(135deg, #1a2a18, #392416 48%, #171d13);
   cursor: var(--knight-cursor);
@@ -80,9 +81,11 @@ button {
 .scroll-card,
 .quest-board,
 .summon-zone {
-  border: 8px double var(--ink);
+  border: 7px solid var(--wood);
+  outline: 4px double var(--gold);
   background:
     radial-gradient(circle at 18% 18%, rgba(255,255,255,.25), transparent 20%),
+    radial-gradient(circle at 86% 12%, rgba(127,36,55,.12), transparent 22%),
     linear-gradient(90deg, rgba(91,53,29,.18), transparent 18%, rgba(91,53,29,.12) 78%, transparent),
     var(--paper);
   box-shadow: var(--shadow);
@@ -90,8 +93,9 @@ button {
 
 .faire-hero {
   position: relative;
-  padding: clamp(26px, 6vw, 58px);
+  padding: clamp(18px, 4vw, 34px) clamp(22px, 5vw, 56px) clamp(28px, 5vw, 52px);
   text-align: center;
+  overflow: visible;
 }
 
 .faire-hero::before,
@@ -106,6 +110,15 @@ button {
 
 .faire-hero::before { left: -13px; }
 .faire-hero::after { right: -13px; }
+
+.hero-castle {
+  display: block;
+  width: min(780px, 94%);
+  max-height: 300px;
+  object-fit: contain;
+  margin: -72px auto 6px;
+  filter: drop-shadow(0 16px 12px rgba(33, 23, 13, .24));
+}
 
 .eyebrow,
 .details span,
@@ -127,7 +140,7 @@ h2 {
 
 h1 {
   color: var(--wine);
-  font-size: clamp(3rem, 9vw, 7rem);
+  font-size: clamp(2.75rem, 8vw, 6.4rem);
   line-height: .92;
   text-shadow: 3px 3px 0 var(--gold), 5px 5px 0 rgba(33,23,13,.18);
 }
@@ -181,14 +194,14 @@ h2 {
   display: grid;
   grid-template-columns: repeat(4, minmax(0, 1fr));
   gap: 10px;
-  margin-top: 22px;
+  margin-top: 28px;
   padding: clamp(16px, 3vw, 28px);
 }
 
 .countdown div {
   min-width: 0;
   padding: 16px 8px;
-  border: 3px solid var(--ink);
+  border: 4px double var(--wood);
   background:
     radial-gradient(circle at 20% 16%, rgba(255,255,255,.28), transparent 24%),
     #fff1c2;
@@ -325,7 +338,7 @@ h2 {
 .quest-item {
   min-height: 86px;
   padding: 14px;
-  border: 3px solid var(--ink);
+  border: 4px double var(--wood);
   background:
     linear-gradient(180deg, rgba(255,255,255,.2), transparent),
     #fff1c2;
