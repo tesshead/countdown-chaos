@@ -135,12 +135,12 @@ function setMidiTitle(text) {
 }
 
 function clearSunMood() {
-  sunBuddy.classList.remove("is-winking", "is-blinking", "is-grinning", "is-cool");
+  sunBuddy.classList.remove("is-smiling", "is-winking", "is-cool");
 }
 
 function animateSunBuddy() {
   clearSunMood();
-  const mood = randomItem(["is-winking", "is-blinking", "is-grinning", "is-cool"]);
+  const mood = randomItem(["is-smiling", "is-winking", "is-cool"]);
   sunBuddy.classList.add(mood);
   window.setTimeout(clearSunMood, mood === "is-cool" ? 1400 : 520);
   scheduleSunBuddy();

@@ -572,95 +572,125 @@ h1 {
 
 .sun-buddy {
   position: fixed;
-  top: 14px;
-  right: 16px;
+  top: 18px;
+  right: 20px;
   z-index: 20;
-  width: 74px;
-  height: 74px;
+  width: 52px;
+  height: 52px;
   border: 0;
   background: transparent;
   padding: 0;
-  filter: drop-shadow(5px 5px 0 rgba(32,18,47,.25));
+  filter: drop-shadow(4px 4px 0 rgba(32,18,47,.22));
 }
 
 .sun-face {
   position: relative;
   display: block;
-  width: 62px;
-  height: 62px;
-  margin: 6px;
-  border: 4px solid var(--ink);
-  border-radius: 50%;
-  background: var(--sun);
+  width: 8px;
+  height: 8px;
+  margin: 22px;
+  border: 0;
+  border-radius: 0;
+  background: #fff200;
   box-shadow:
-    0 -12px 0 -4px var(--orange),
-    0 12px 0 -4px var(--orange),
-    12px 0 0 -4px var(--orange),
-    -12px 0 0 -4px var(--orange),
-    9px 9px 0 -4px var(--orange),
-    -9px -9px 0 -4px var(--orange),
-    9px -9px 0 -4px var(--orange),
-    -9px 9px 0 -4px var(--orange);
+    0 -24px 0 #fff200,
+    -8px -24px 0 #fff200,
+    8px -24px 0 #fff200,
+    -16px -16px 0 #fff200,
+    -8px -16px 0 #fff200,
+    0 -16px 0 #fff200,
+    8px -16px 0 #fff200,
+    16px -16px 0 #fff200,
+    -24px -8px 0 #fff200,
+    -16px -8px 0 #fff200,
+    -8px -8px 0 #fff200,
+    0 -8px 0 #fff200,
+    8px -8px 0 #fff200,
+    16px -8px 0 #fff200,
+    24px -8px 0 #fff200,
+    -24px 0 0 #fff200,
+    -16px 0 0 #fff200,
+    -8px 0 0 #fff200,
+    8px 0 0 #fff200,
+    16px 0 0 #fff200,
+    24px 0 0 #fff200,
+    -24px 8px 0 #ffe600,
+    -16px 8px 0 #ffe600,
+    -8px 8px 0 #ffe600,
+    0 8px 0 #ffe600,
+    8px 8px 0 #ffe600,
+    16px 8px 0 #ffe600,
+    24px 8px 0 #ffe600,
+    -16px 16px 0 #ffd000,
+    -8px 16px 0 #ffd000,
+    0 16px 0 #ffd000,
+    8px 16px 0 #ffd000,
+    16px 16px 0 #ffd000,
+    -8px 24px 0 #ffd000,
+    0 24px 0 #ffd000,
+    8px 24px 0 #ffd000;
   image-rendering: pixelated;
 }
 
 .sun-eye {
   position: absolute;
-  top: 22px;
-  width: 8px;
-  height: 8px;
-  border-radius: 2px;
+  top: -4px;
+  width: 6px;
+  height: 6px;
+  border-radius: 0;
   background: var(--ink);
+  opacity: 0;
 }
 
-.sun-eye--left { left: 15px; }
-.sun-eye--right { right: 15px; }
+.sun-eye--left { left: -8px; }
+.sun-eye--right { right: -10px; }
 
 .sun-mouth {
   position: absolute;
-  left: 22px;
-  top: 38px;
-  width: 18px;
-  height: 8px;
-  border-bottom: 4px solid var(--ink);
-  border-radius: 0 0 18px 18px;
+  left: -6px;
+  top: 12px;
+  width: 4px;
+  height: 4px;
+  border: 0;
+  background: var(--ink);
+  border-radius: 0;
+  opacity: 0;
+  box-shadow:
+    4px 4px 0 var(--ink),
+    8px 4px 0 var(--ink),
+    12px 0 0 var(--ink);
+}
+
+.sun-buddy.is-smiling .sun-eye,
+.sun-buddy.is-winking .sun-eye,
+.sun-buddy.is-cool .sun-eye,
+.sun-buddy.is-smiling .sun-mouth,
+.sun-buddy.is-winking .sun-mouth,
+.sun-buddy.is-cool .sun-mouth {
+  opacity: 1;
 }
 
 .sun-buddy.is-winking .sun-eye--right {
-  height: 4px;
-  top: 25px;
-}
-
-.sun-buddy.is-blinking .sun-eye {
-  height: 4px;
-  top: 25px;
-}
-
-.sun-buddy.is-grinning .sun-mouth {
-  left: 18px;
-  width: 26px;
-  height: 12px;
-  border: 4px solid var(--ink);
-  border-top: 0;
-  background: #fff;
+  height: 3px;
+  top: -2px;
 }
 
 .sun-buddy.is-cool .sun-eye {
-  top: 20px;
-  width: 14px;
-  height: 9px;
-  border-radius: 1px;
+  top: -5px;
+  width: 13px;
+  height: 8px;
+  border-radius: 0;
 }
 
-.sun-buddy.is-cool .sun-eye--left { left: 11px; }
-.sun-buddy.is-cool .sun-eye--right { right: 11px; }
+.sun-buddy.is-cool .sun-eye--left { left: -13px; }
+.sun-buddy.is-cool .sun-eye--right { right: -15px; }
 
 .sun-buddy.is-cool .sun-face::after {
   content: "";
   position: absolute;
-  left: 24px;
-  top: 23px;
-  width: 14px;
+  left: -3px;
+  top: -2px;
+  width: 8px;
   height: 3px;
   background: var(--ink);
 }
