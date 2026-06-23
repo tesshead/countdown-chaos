@@ -6,7 +6,7 @@ A static, goofy, obnoxious GitHub Pages countdown hub for upcoming chaos. No fra
 
 - Landing page: `https://tesshead.github.io/countdown-chaos/`
 - Destin Girls Trip / Operation Beach Please: `https://tesshead.github.io/countdown-chaos/destin-2026/`
-- Chattanooga Renaissance Faire: `https://tesshead.github.io/countdown-chaos/ren-faire-2026/`
+- Chattanooga Fall Renaissance Faire: `https://tesshead.github.io/countdown-chaos/ren-faire-2026/`
 
 ## How to add a new countdown
 
