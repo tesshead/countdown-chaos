@@ -1,16 +1,16 @@
 :root {
-  --moss: #587c32;
-  --forest: #263d1f;
-  --gold: #f3cf5b;
-  --wine: #7f1d3d;
-  --plum: #3b1632;
+  --moss: #536f32;
+  --forest: #192919;
+  --gold: #d6a84d;
+  --wine: #7f2437;
+  --plum: #35201f;
   --ink: #21170d;
-  --paper: #fff3c6;
-  --paper-dark: #e6ca83;
-  --sky: #aee7ff;
-  --shadow: 0 20px 50px rgba(33, 23, 13, .24);
-  --knight-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23b8c4d6' stroke='%2321170d' stroke-width='2' d='M9 17c0-7 4-12 10-12 4 0 7 3 7 8v9H9z'/%3E%3Cpath fill='%237f1d3d' stroke='%2321170d' stroke-width='2' d='M6 24h22l-3 5H9z'/%3E%3Cpath fill='%2321170d' d='M14 14h10v3H14z'/%3E%3Cpath fill='%23f3cf5b' d='M16 4h5l-3 5z'/%3E%3C/svg%3E") 4 4, auto;
-  --sword-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Cpath fill='%23d9e2ef' stroke='%2321170d' stroke-width='2' d='M23 3l6 6L13 25l-6 2 2-6z'/%3E%3Cpath stroke='%237f1d3d' stroke-width='4' d='M8 24l-3 3'/%3E%3C/svg%3E") 4 4, pointer;
+  --paper: #f4dfaa;
+  --paper-dark: #c99b58;
+  --wood: #5b351d;
+  --shadow: 0 22px 52px rgba(12, 8, 4, .42);
+  --knight-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='1' y='25' font-size='24'%3E%F0%9F%A4%BA%3C/text%3E%3C/svg%3E") 4 4, auto;
+  --sword-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='1' y='25' font-size='24'%3E%E2%9A%94%EF%B8%8F%3C/text%3E%3C/svg%3E") 4 4, pointer;
 }
 
 * { box-sizing: border-box; }
@@ -21,12 +21,23 @@ body {
   color: var(--ink);
   font-family: Georgia, "Times New Roman", serif;
   background:
-    radial-gradient(circle at 20% 10%, rgba(255,255,255,.7), transparent 24%),
-    radial-gradient(circle at 82% 18%, rgba(243,207,91,.45), transparent 22%),
-    repeating-linear-gradient(90deg, rgba(33,23,13,.08) 0 10px, transparent 10px 20px),
-    linear-gradient(160deg, var(--sky), #e8ffd0 42%, #d7b56d);
+    radial-gradient(circle at 18% 8%, rgba(214,168,77,.26), transparent 28%),
+    radial-gradient(circle at 84% 18%, rgba(127,36,55,.18), transparent 24%),
+    linear-gradient(180deg, rgba(15,28,16,.92), rgba(23,35,19,.86)),
+    linear-gradient(135deg, #1a2a18, #392416 48%, #171d13);
   cursor: var(--knight-cursor);
   overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  pointer-events: none;
+  background:
+    radial-gradient(circle at 14% 22%, rgba(244,223,170,.11), transparent 18%),
+    radial-gradient(circle at 70% 76%, rgba(244,223,170,.08), transparent 20%),
+    linear-gradient(90deg, rgba(0,0,0,.22), transparent 18%, transparent 82%, rgba(0,0,0,.22));
 }
 
 a,
@@ -43,6 +54,8 @@ button {
 }
 
 .faire-shell {
+  position: relative;
+  z-index: 1;
   width: min(1100px, 92vw);
   margin: 0 auto;
   padding: clamp(24px, 5vw, 52px) 0;
@@ -53,13 +66,13 @@ button {
   margin-bottom: 16px;
   padding: 10px 14px;
   border: 3px solid var(--ink);
-  background: var(--gold);
+  background: linear-gradient(180deg, #e4bd69, var(--gold));
   color: var(--ink);
   font-family: "Trebuchet MS", Verdana, sans-serif;
   font-weight: 900;
   text-decoration: none;
   text-transform: uppercase;
-  box-shadow: 5px 5px 0 var(--wine);
+  box-shadow: 5px 5px 0 rgba(0,0,0,.55);
 }
 
 .faire-hero,
@@ -69,15 +82,30 @@ button {
 .summon-zone {
   border: 8px double var(--ink);
   background:
-    linear-gradient(90deg, rgba(255,255,255,.22), transparent 18%, rgba(255,255,255,.22) 50%, transparent 82%),
+    radial-gradient(circle at 18% 18%, rgba(255,255,255,.25), transparent 20%),
+    linear-gradient(90deg, rgba(91,53,29,.18), transparent 18%, rgba(91,53,29,.12) 78%, transparent),
     var(--paper);
   box-shadow: var(--shadow);
 }
 
 .faire-hero {
+  position: relative;
   padding: clamp(26px, 6vw, 58px);
   text-align: center;
 }
+
+.faire-hero::before,
+.faire-hero::after {
+  content: "";
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  width: 18px;
+  background: linear-gradient(90deg, #6d4325, var(--wood), #2b170d);
+}
+
+.faire-hero::before { left: -13px; }
+.faire-hero::after { right: -13px; }
 
 .eyebrow,
 .details span,
@@ -101,7 +129,7 @@ h1 {
   color: var(--wine);
   font-size: clamp(3rem, 9vw, 7rem);
   line-height: .92;
-  text-shadow: 3px 3px 0 var(--gold);
+  text-shadow: 3px 3px 0 var(--gold), 5px 5px 0 rgba(33,23,13,.18);
 }
 
 h2 {
@@ -110,9 +138,9 @@ h2 {
 }
 
 .subtitle {
-  max-width: 780px;
+  max-width: 860px;
   margin: 20px auto 0;
-  font-size: clamp(1.2rem, 3vw, 1.75rem);
+  font-size: clamp(1.05rem, 2.5vw, 1.55rem);
   font-weight: 700;
 }
 
@@ -121,7 +149,7 @@ h2 {
   max-width: 900px;
   overflow: hidden;
   border: 4px ridge var(--gold);
-  background: var(--plum);
+  background: linear-gradient(180deg, #21170d, var(--plum));
   color: #fff6bd;
   font-family: "Trebuchet MS", Verdana, sans-serif;
   font-weight: 900;
@@ -146,7 +174,7 @@ h2 {
 .details span {
   padding: 8px 12px;
   border: 2px solid var(--ink);
-  background: var(--gold);
+  background: linear-gradient(180deg, #e4bd69, var(--gold));
 }
 
 .countdown {
@@ -161,7 +189,9 @@ h2 {
   min-width: 0;
   padding: 16px 8px;
   border: 3px solid var(--ink);
-  background: #fffbe8;
+  background:
+    radial-gradient(circle at 20% 16%, rgba(255,255,255,.28), transparent 24%),
+    #fff1c2;
   text-align: center;
   box-shadow: inset 0 0 0 4px rgba(127,29,61,.08);
 }
@@ -296,7 +326,9 @@ h2 {
   min-height: 86px;
   padding: 14px;
   border: 3px solid var(--ink);
-  background: #fffbe8;
+  background:
+    linear-gradient(180deg, rgba(255,255,255,.2), transparent),
+    #fff1c2;
   box-shadow: 5px 5px 0 rgba(33,23,13,.18);
   font-family: "Trebuchet MS", Verdana, sans-serif;
   font-weight: 900;
