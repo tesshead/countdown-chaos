@@ -116,6 +116,13 @@ function randomItem(items) {
   return items[Math.floor(Math.random() * items.length)];
 }
 
+function setMidiTitle(text) {
+  midiTitle.textContent = text;
+  midiTitle.style.animation = "none";
+  void midiTitle.offsetWidth;
+  midiTitle.style.animation = "";
+}
+
 function rotateCopy() {
   moodEl.textContent = randomItem(moods);
   prophecyEl.textContent = randomItem(prophecies);
@@ -376,7 +383,7 @@ function stopMidiPlayer() {
     audioTrack = null;
   }
   midiPlayer.classList.remove("is-playing");
-  midiTitle.textContent = "BEACH RADIO IS CURRENTLY LOITERING";
+  setMidiTitle("BEACH RADIO IS CURRENTLY LOITERING");
 }
 
 function startMidiPlayer() {
@@ -389,23 +396,23 @@ function startMidiPlayer() {
     audioTrack.play().then(() => {
       midiIsPlaying = true;
       midiPlayer.classList.add("is-playing");
-      midiTitle.textContent = `PLAYING: ${midiTrackSelect.options[midiTrackSelect.selectedIndex].text}`;
+      setMidiTitle(`PLAYING: ${midiTrackSelect.options[midiTrackSelect.selectedIndex].text}`);
     }).catch(() => {
-      midiTitle.textContent = "AUDIO DEVICE REFUSED THE BEACH ANTHEM.";
+      setMidiTitle("AUDIO DEVICE REFUSED THE BEACH ANTHEM.");
     });
     return;
   }
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!AudioContext) {
-    midiTitle.textContent = "MIDI DEVICE NOT FOUND. PLEASE HUM INTO A COCONUT.";
+    setMidiTitle("MIDI DEVICE NOT FOUND. PLEASE HUM INTO A COCONUT.");
     return;
   }
 
   midiContext = new AudioContext();
   midiIsPlaying = true;
   midiPlayer.classList.add("is-playing");
-  midiTitle.textContent = "PLAYING: THE COCONUT MODEM LOUNGE LOOP";
+  setMidiTitle("PLAYING: THE COCONUT MODEM LOUNGE LOOP");
   scheduleTropicalMidiLoop(midiContext);
 }
 

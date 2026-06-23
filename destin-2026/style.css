@@ -166,11 +166,18 @@ h1 {
   text-transform: uppercase;
 }
 
-.midi-screen span:last-child {
+.midi-text-window {
+  flex: 1 1 auto;
   min-width: 0;
   overflow: hidden;
-  text-overflow: ellipsis;
   white-space: nowrap;
+}
+
+#midi-title {
+  display: inline-block;
+  min-width: max-content;
+  padding-left: 100%;
+  animation: midi-text-scroll 12s linear infinite;
 }
 
 .midi-light {
@@ -627,6 +634,11 @@ h1 {
 @keyframes midi-blink {
   from { opacity: 1; }
   to { opacity: .35; }
+}
+
+@keyframes midi-text-scroll {
+  from { transform: translateX(0); }
+  to { transform: translateX(-100%); }
 }
 
 @media (max-width: 760px) {
