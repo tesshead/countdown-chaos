@@ -376,7 +376,7 @@ function stopMidiPlayer() {
     audioTrack = null;
   }
   midiPlayer.classList.remove("is-playing");
-  midiTitle.textContent = "NOW PLAYING: LEGALLY DISTINCT PINA COLADA-ADJACENT BEACH MIDI";
+  midiTitle.textContent = "BEACH RADIO IS CURRENTLY LOITERING";
 }
 
 function startMidiPlayer() {
