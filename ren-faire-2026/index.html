@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Chattanooga Renaissance Faire Countdown</title>
+  <meta name="description" content="A goofy countdown to Chattanooga Renaissance Faire 2026." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="faire-shell">
+    <a class="home-link" href="../">Back to chaos hub</a>
+
+    <header class="faire-hero">
+      <p class="eyebrow">Hear ye, hear ye</p>
+      <h1>Chattanooga Renaissance Faire</h1>
+      <p class="subtitle">Days until the realm descends into organized chaos</p>
+      <div class="details">
+        <span>Nov 14-15, 2026</span>
+        <span>Coolidge Park & Renaissance Park</span>
+      </div>
+    </header>
+
+    <section class="countdown" aria-label="Ren faire countdown" aria-live="polite">
+      <div><strong id="days">--</strong><span>days</span></div>
+      <div><strong id="hours">--</strong><span>hours</span></div>
+      <div><strong id="minutes">--</strong><span>minutes</span></div>
+      <div><strong id="seconds">--</strong><span>seconds</span></div>
+    </section>
+
+    <section class="scrolls" aria-label="Faire notices">
+      <article>
+        <h2>Royal Mood</h2>
+        <p id="mood">Polishing the goblet. Emotionally preparing for turkey legs.</p>
+      </article>
+      <article>
+        <h2>Village Bulletin</h2>
+        <p>Medieval chaos, goblins, tavern wenches, faire countdown. Sensible shoes recommended by exactly one responsible villager.</p>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

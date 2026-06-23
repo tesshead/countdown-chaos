@@ -1,0 +1,59 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tess's Totally Essential Countdown Hub</title>
+  <meta name="description" content="A static, sparkly countdown hub for upcoming chaos." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="sparkle-field" aria-hidden="true"></div>
+  <main class="hub-shell">
+    <header class="hero">
+      <p class="eyebrow">* TESS'S TOTALLY ESSENTIAL COUNTDOWN HUB *</p>
+      <h1>Upcoming Chaos</h1>
+      <p class="subtitle">A very serious operations center for beach emergencies, faire nonsense, and other calendar-based theatrics.</p>
+      <div class="faux-marquee" aria-label="Breaking chaos bulletin">
+        <span>BREAKING: the group chat has entered countdown formation * snacks encouraged * emotional support itineraries pending *</span>
+      </div>
+    </header>
+
+    <section class="countdown-grid" aria-label="Countdown events">
+      <article class="event-card beach-card">
+        <div class="event-card__copy">
+          <p class="badge">Active Mission</p>
+          <h2>Destin Girls Trip</h2>
+          <p class="codename">Operation Beach Please</p>
+          <p>Beach, girls trip, unhinged group chat energy. The vibes are already wearing sunglasses.</p>
+        </div>
+        <div class="mini-countdown" data-countdown="2026-08-07T12:00:00-04:00" aria-live="polite">
+          <div><strong data-unit="days">--</strong><span>days</span></div>
+          <div><strong data-unit="hours">--</strong><span>hours</span></div>
+          <div><strong data-unit="minutes">--</strong><span>min</span></div>
+          <div><strong data-unit="seconds">--</strong><span>sec</span></div>
+        </div>
+        <a class="chaos-link" href="./destin-2026/">Enter beach mode</a>
+      </article>
+
+      <article class="event-card faire-card">
+        <div class="event-card__copy">
+          <p class="badge">Royal Decree</p>
+          <h2>Chattanooga Renaissance Faire</h2>
+          <p class="codename">Nov 14-15, 2026</p>
+          <p>Medieval chaos, goblins, tavern wenches, and the kind of countdown that probably needs a lute.</p>
+        </div>
+        <div class="mini-countdown" data-countdown="2026-11-14T10:00:00-05:00" aria-live="polite">
+          <div><strong data-unit="days">--</strong><span>days</span></div>
+          <div><strong data-unit="hours">--</strong><span>hours</span></div>
+          <div><strong data-unit="minutes">--</strong><span>min</span></div>
+          <div><strong data-unit="seconds">--</strong><span>sec</span></div>
+        </div>
+        <a class="chaos-link" href="./ren-faire-2026/">Enter the realm</a>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>

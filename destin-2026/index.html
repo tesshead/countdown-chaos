@@ -3,28 +3,27 @@
 <head>
   <meta charset="utf-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
-  <title>Tess's Countdown Chaos</title>
-  <meta name="description" content="A very serious countdown hub for deeply unserious events." />
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <title>Operation: Beach Please</title>
+  <meta name="description" content="A deeply unserious countdown to the Destin girls trip." />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div class="sparkle-layer" aria-hidden="true"></div>
+  <div id="fireworks" class="fireworks" aria-hidden="true"></div>
+
   <main class="shell">
+    <a class="home-link" href="../">Back to chaos hub</a>
+
     <header class="topper">
-      <p class="eyebrow">✨ TESS'S TOTALLY ESSENTIAL COUNTDOWN HUB ✨</p>
-      <h1>Upcoming Chaos</h1>
-      <p class="subtitle">Currently tracking one highly important girls trip. Future nonsense may be added as needed.</p>
+      <p class="eyebrow">Official girls trip operations dashboard</p>
+      <h1>🌴 OPERATION: BEACH PLEASE 🌴</h1>
+      <p class="subtitle">Days until the group chat becomes reality</p>
+      <div class="faux-marquee">
+        <span>BEACH ALERT * BEACH ALERT * SPF HAS ENTERED THE CHAT * FINANCIAL JUDGMENT NOT INVITED *</span>
+      </div>
     </header>
 
-    <section class="event-card" aria-label="Girls trip countdown">
-      <div class="event-copy">
-        <p class="badge">🌴 ACTIVE MISSION</p>
-        <h2 id="trip-title">Girls Trip Countdown</h2>
-        <p id="tagline">Hydration optional. Dramatic beach entrance mandatory.</p>
-      </div>
-
+    <section class="countdown-card" aria-label="Destin countdown">
       <div class="countdown" aria-live="polite">
         <div class="time-card"><span id="days">--</span><small>days</small></div>
         <div class="time-card"><span id="hours">--</span><small>hours</small></div>
@@ -33,29 +32,46 @@
       </div>
 
       <div class="status-card">
-        <p id="status">Calculating precisely how close we are to being insufferable near water...</p>
-      </div>
-
-      <div class="meter" aria-label="Hype level">
-        <div class="meter-label"><span>Beach Trip Hype Level</span><strong id="hype-label">FERAL</strong></div>
-        <div class="meter-track"><div id="hype-fill" class="meter-fill"></div></div>
+        <p id="status">Calculating how close we are to being dramatic near water...</p>
       </div>
     </section>
 
-    <section class="extras">
-      <article>
-        <h3>Today’s official prophecy</h3>
-        <p id="prophecy"></p>
+    <section class="chaos-grid" aria-label="Beach trip details">
+      <article class="panel">
+        <p class="panel-label">Current Mood</p>
+        <p id="mood" class="big-line"></p>
       </article>
-      <article>
-        <h3>Pre-trip commandments</h3>
-        <ul>
-          <li>Thou shalt overpack swimwear.</li>
-          <li>Thou shalt send “what are we wearing” texts.</li>
-          <li>Thou shalt not pretend SPF 15 is enough.</li>
-          <li>Thou shalt romanticize every beverage with ice.</li>
-        </ul>
+
+      <article class="panel">
+        <p class="panel-label">Vacation Prophecy</p>
+        <p id="prophecy" class="big-line"></p>
       </article>
+
+      <article class="panel hype-panel">
+        <div class="meter-label">
+          <span>HYPE LEVEL</span>
+          <strong id="hype-label">Current threat level: beach goblin</strong>
+        </div>
+        <div class="meter-track" aria-label="Hype level">
+          <div id="hype-fill" class="meter-fill"></div>
+        </div>
+        <p id="hype-percent" class="hype-percent">--%</p>
+      </article>
+
+      <article class="panel badge-panel">
+        <p class="panel-label">Goofy Badges</p>
+        <div class="badge-rack" aria-label="Beach badges">
+          <span>Certified Sunscreen Supervisor</span>
+          <span>Snack Logistics Dept.</span>
+          <span>Group Chat Menace</span>
+          <span>OOO Message Apprentice</span>
+        </div>
+      </article>
+    </section>
+
+    <section class="emergency-zone" aria-label="Beach emergency controls">
+      <p id="emergency-message" class="emergency-message" aria-live="polite"></p>
+      <button id="beach-button" type="button">I NEED A BEACH RIGHT NOW</button>
     </section>
   </main>
 
