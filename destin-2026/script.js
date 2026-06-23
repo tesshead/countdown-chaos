@@ -91,6 +91,7 @@ const beachButton = document.getElementById("beach-button");
 const surfFlag = document.getElementById("surf-flag");
 const surfStatus = document.getElementById("surf-status");
 const surfDetail = document.getElementById("surf-detail");
+let currentBeachAlert = "";
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -106,7 +107,13 @@ function rotateCopy() {
 }
 
 function rotateBeachAlert() {
-  beachAlertEl.textContent = randomItem(beachAlerts);
+  let nextAlert = randomItem(beachAlerts);
+  while (nextAlert === currentBeachAlert && beachAlerts.length > 1) {
+    nextAlert = randomItem(beachAlerts);
+  }
+
+  currentBeachAlert = nextAlert;
+  beachAlertEl.textContent = nextAlert;
 }
 
 function rotateStatusMessage() {
@@ -377,10 +384,10 @@ loadDestinSurfVibe();
 updateCountdown();
 setInterval(updateCountdown, 1000);
 setInterval(rotateCopy, 10000);
-setInterval(rotateBeachAlert, 7000);
 setInterval(rotateStatusMessage, 9000);
 setInterval(renderTravelerBoard, 60000);
 
+beachAlertEl.addEventListener("animationiteration", rotateBeachAlert);
 beachButton.addEventListener("click", declareBeachEmergency);
 document.addEventListener("click", (event) => {
   if (event.target === beachButton) return;
