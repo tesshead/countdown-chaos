@@ -570,6 +570,126 @@ h1 {
   z-index: 10;
 }
 
+.sun-buddy {
+  position: fixed;
+  top: 14px;
+  right: 16px;
+  z-index: 20;
+  width: 74px;
+  height: 74px;
+  border: 0;
+  background: transparent;
+  padding: 0;
+  filter: drop-shadow(5px 5px 0 rgba(32,18,47,.25));
+}
+
+.sun-face {
+  position: relative;
+  display: block;
+  width: 62px;
+  height: 62px;
+  margin: 6px;
+  border: 4px solid var(--ink);
+  border-radius: 50%;
+  background: var(--sun);
+  box-shadow:
+    0 -12px 0 -4px var(--orange),
+    0 12px 0 -4px var(--orange),
+    12px 0 0 -4px var(--orange),
+    -12px 0 0 -4px var(--orange),
+    9px 9px 0 -4px var(--orange),
+    -9px -9px 0 -4px var(--orange),
+    9px -9px 0 -4px var(--orange),
+    -9px 9px 0 -4px var(--orange);
+  image-rendering: pixelated;
+}
+
+.sun-eye {
+  position: absolute;
+  top: 22px;
+  width: 8px;
+  height: 8px;
+  border-radius: 2px;
+  background: var(--ink);
+}
+
+.sun-eye--left { left: 15px; }
+.sun-eye--right { right: 15px; }
+
+.sun-mouth {
+  position: absolute;
+  left: 22px;
+  top: 38px;
+  width: 18px;
+  height: 8px;
+  border-bottom: 4px solid var(--ink);
+  border-radius: 0 0 18px 18px;
+}
+
+.sun-buddy.is-winking .sun-eye--right {
+  height: 4px;
+  top: 25px;
+}
+
+.sun-buddy.is-blinking .sun-eye {
+  height: 4px;
+  top: 25px;
+}
+
+.sun-buddy.is-grinning .sun-mouth {
+  left: 18px;
+  width: 26px;
+  height: 12px;
+  border: 4px solid var(--ink);
+  border-top: 0;
+  background: #fff;
+}
+
+.sun-buddy.is-cool .sun-eye {
+  top: 20px;
+  width: 14px;
+  height: 9px;
+  border-radius: 1px;
+}
+
+.sun-buddy.is-cool .sun-eye--left { left: 11px; }
+.sun-buddy.is-cool .sun-eye--right { right: 11px; }
+
+.sun-buddy.is-cool .sun-face::after {
+  content: "";
+  position: absolute;
+  left: 24px;
+  top: 23px;
+  width: 14px;
+  height: 3px;
+  background: var(--ink);
+}
+
+.sun-bubble {
+  position: absolute;
+  top: 60px;
+  right: 58px;
+  min-width: 112px;
+  max-width: 180px;
+  padding: 7px 9px;
+  border: 3px solid var(--ink);
+  background: #fff;
+  color: var(--ink);
+  font-size: .72rem;
+  font-weight: 900;
+  line-height: 1.15;
+  text-transform: uppercase;
+  opacity: 0;
+  transform: translateY(-4px);
+  pointer-events: none;
+  transition: opacity .14s ease, transform .14s ease;
+}
+
+.sun-bubble.is-visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .burst {
   position: absolute;
   width: 9px;
@@ -688,6 +808,17 @@ h1 {
 
   .departures-row--header {
     display: none;
+  }
+
+  .sun-buddy {
+    top: 8px;
+    right: 8px;
+    transform: scale(.78);
+    transform-origin: top right;
+  }
+
+  .sun-bubble {
+    right: 48px;
   }
 
   .departures-row {

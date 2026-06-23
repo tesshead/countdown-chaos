@@ -102,11 +102,22 @@ const midiTrackSelect = document.getElementById("midi-track");
 const midiPlayButton = document.getElementById("midi-play");
 const midiStopButton = document.getElementById("midi-stop");
 const midiTitle = document.getElementById("midi-title");
+const sunBuddy = document.getElementById("sun-buddy");
+const sunBubble = document.getElementById("sun-bubble");
 let currentBeachAlert = "";
 let midiContext = null;
 let midiLoopTimer = null;
 let midiIsPlaying = false;
 let audioTrack = null;
+
+const sunQuips = [
+  "spf 9000",
+  "nice hat",
+  "beach soon",
+  "hydration?",
+  "i saw that",
+  "vibes verified"
+];
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -121,6 +132,30 @@ function setMidiTitle(text) {
   midiTitle.style.animation = "none";
   void midiTitle.offsetWidth;
   midiTitle.style.animation = "";
+}
+
+function clearSunMood() {
+  sunBuddy.classList.remove("is-winking", "is-blinking", "is-grinning", "is-cool");
+}
+
+function animateSunBuddy() {
+  clearSunMood();
+  const mood = randomItem(["is-winking", "is-blinking", "is-grinning", "is-cool"]);
+  sunBuddy.classList.add(mood);
+  window.setTimeout(clearSunMood, mood === "is-cool" ? 1400 : 520);
+  scheduleSunBuddy();
+}
+
+function scheduleSunBuddy() {
+  const delay = 12000 + Math.random() * 45000;
+  window.setTimeout(animateSunBuddy, delay);
+}
+
+function showSunQuip() {
+  sunBubble.textContent = randomItem(sunQuips);
+  sunBubble.classList.add("is-visible");
+  animateSunBuddy();
+  window.setTimeout(() => sunBubble.classList.remove("is-visible"), 1800);
 }
 
 function rotateCopy() {
@@ -498,6 +533,7 @@ rotateBeachAlert();
 rotateStatusMessage();
 renderTravelerBoard();
 loadDestinSurfVibe();
+scheduleSunBuddy();
 updateCountdown();
 setInterval(updateCountdown, 1000);
 setInterval(rotateCopy, 10000);
@@ -512,6 +548,7 @@ midiTrackSelect.addEventListener("change", () => {
   stopMidiPlayer();
   if (wasPlaying) startMidiPlayer();
 });
+sunBuddy.addEventListener("click", showSunQuip);
 beachButton.addEventListener("click", declareBeachEmergency);
 document.addEventListener("click", (event) => {
   if (event.target === beachButton) return;
