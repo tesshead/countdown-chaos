@@ -7,8 +7,8 @@
   --ink: #20122f;
   --paper: rgba(255,255,255,.9);
   --shadow: 0 22px 70px rgba(34, 12, 50, .28);
-  --shiba-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='2' y='25' font-size='24'%3E%F0%9F%90%95%3C/text%3E%3C/svg%3E") 4 4, auto;
-  --shiba-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='1' y='24' font-size='24'%3E%F0%9F%90%B6%3C/text%3E%3C/svg%3E") 4 4, pointer;
+  --beach-cursor: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='1' y='25' font-size='24'%3E%F0%9F%8D%B9%3C/text%3E%3C/svg%3E") 4 4, auto;
+  --beach-pointer: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='32' height='32' viewBox='0 0 32 32'%3E%3Ctext x='1' y='25' font-size='24'%3E%F0%9F%92%83%3C/text%3E%3C/svg%3E") 4 4, pointer;
 }
 
 * { box-sizing: border-box; }
@@ -28,13 +28,13 @@ body {
     linear-gradient(125deg, #ff74bd, #21d4fd, #fff269, #70ff91, #ff74bd);
   background-size: auto, auto, 520% 520%;
   animation: gradient-chaos 11s ease-in-out infinite;
-  cursor: var(--shiba-cursor);
+  cursor: var(--beach-cursor);
   overflow-x: hidden;
 }
 
 a,
 button {
-  cursor: var(--shiba-pointer);
+  cursor: var(--beach-pointer);
 }
 
 .sparkle-layer {

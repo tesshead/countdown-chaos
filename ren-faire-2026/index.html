@@ -8,6 +8,8 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <div id="court-sparkles" class="court-sparkles" aria-hidden="true"></div>
+
   <main class="faire-shell">
     <a class="home-link" href="../">Back to chaos hub</a>
 
@@ -15,6 +17,9 @@
       <p class="eyebrow">Hear ye, hear ye</p>
       <h1>Chattanooga Fall Renaissance Faire</h1>
       <p class="subtitle">Days until the realm descends into organized fall chaos</p>
+      <div class="royal-decree" aria-label="Royal decree ticker">
+        <span id="royal-decree">HEAR YE * TURKEY LEG CONDITIONS RISING * CLOAK WEATHER REQUESTED * THE REALM IS NOT READY *</span>
+      </div>
       <div class="details">
         <span>Second faire of 2026</span>
         <span>Nov 14-15, 2026</span>
@@ -24,20 +29,56 @@
 
     <section class="countdown" aria-label="Ren faire countdown" aria-live="polite">
       <div><strong id="days">--</strong><span>days</span></div>
-      <div><strong id="hours">--</strong><span>hours</span></div>
+      <div><strong id="hours">--</strong><span>bells</span></div>
       <div><strong id="minutes">--</strong><span>minutes</span></div>
       <div><strong id="seconds">--</strong><span>seconds</span></div>
     </section>
 
-    <section class="scrolls" aria-label="Faire notices">
-      <article>
-        <h2>Royal Mood</h2>
-        <p id="mood">Polishing the goblet. Emotionally preparing for turkey legs.</p>
+    <section class="realm-grid" aria-label="Faire dashboard">
+      <article class="scroll-card readiness-card">
+        <div class="card-topline">
+          <h2>Realm Readiness</h2>
+          <strong id="readiness-label">Peasant Mode</strong>
+        </div>
+        <div class="readiness-track" aria-label="Realm readiness meter">
+          <div id="readiness-fill" class="readiness-fill"></div>
+        </div>
+        <p id="readiness-percent" class="readiness-percent">--%</p>
       </article>
-      <article>
+
+      <article class="scroll-card">
+        <h2>Tavern Rumor</h2>
+        <p id="rumor" class="big-scroll-text">A bard has been spotted near the snack line.</p>
+      </article>
+
+      <article class="scroll-card cloak-card">
+        <h2>Royal Cloak Advisory</h2>
+        <div class="cloak-widget">
+          <div id="cloak-icon" class="cloak-icon cloak-icon--loading" aria-hidden="true"></div>
+          <div>
+            <p id="cloak-status" class="big-scroll-text">Consulting the sky council...</p>
+            <p id="cloak-detail" class="fine-print">Weather.gov raven loading.</p>
+          </div>
+        </div>
+      </article>
+
+      <article class="scroll-card">
         <h2>Village Bulletin</h2>
         <p>The summer faire happened May 30. This is the fall encore: medieval chaos, goblins, tavern wenches, faire countdown. Sensible shoes recommended by exactly one responsible villager.</p>
       </article>
+    </section>
+
+    <section class="quest-board" aria-label="Quest board">
+      <div class="card-topline">
+        <h2>Quest Board</h2>
+        <span>Mandatory nonsense before entering the realm</span>
+      </div>
+      <div id="quest-list" class="quest-list"></div>
+    </section>
+
+    <section class="summon-zone" aria-label="Summon the court">
+      <p id="summon-message" class="summon-message" aria-live="polite"></p>
+      <button id="summon-button" type="button">Summon the Court</button>
     </section>
   </main>
 
