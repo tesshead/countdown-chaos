@@ -1,9 +1,6 @@
 // Countdown target: August 7, 2026 at 12:00 PM America/New_York.
 const tripDate = new Date("2026-08-07T12:00:00-04:00").getTime();
 
-// Hype ramps from this date to max chaos on trip day.
-const hypeStartDate = new Date("2026-06-23T00:00:00-04:00").getTime();
-
 // Easy edit zone for future nonsense.
 const moods = [
   "Already mentally on the beach.",
@@ -74,10 +71,19 @@ function updateCountdown() {
   if (diff <= 0) index = 6;
   document.getElementById("status").textContent = statusMessages[index];
 
-  const progress = (Date.now() - hypeStartDate) / (tripDate - hypeStartDate);
-  const hype = Math.max(3, Math.min(100, Math.round(progress * 100)));
+  const hype = calculateHype(days, diff);
   document.getElementById("hype-fill").style.width = `${hype}%`;
   document.getElementById("hype-percent").textContent = `${hype}%`;
+}
+
+function calculateHype(daysUntilTrip, millisecondsUntilTrip) {
+  if (millisecondsUntilTrip <= 0) return 100;
+  if (daysUntilTrip > 90) return 10;
+  if (daysUntilTrip > 60) return 25;
+  if (daysUntilTrip > 30) return 55;
+  if (daysUntilTrip > 14) return 78;
+  if (daysUntilTrip > 7) return 90;
+  return 98;
 }
 
 function playBeachSound() {
