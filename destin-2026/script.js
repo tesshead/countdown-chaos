@@ -73,6 +73,12 @@ const travelers = [
     status: "NORTHERN DELEGATION INBOUND"
   },
   {
+    unit: "KATIE",
+    route: "DESTIN SECTOR",
+    detail: "LOCAL LEGEND",
+    status: "OPEN INVITATION ACTIVE"
+  },
+  {
     unit: "ALL",
     route: "ATL -> DESTIN",
     detail: "AUG 6 BEACHWARD",
@@ -151,7 +157,7 @@ function getMissionReadout(now = Date.now()) {
   const sarahArrive = new Date("2026-08-06T14:22:00-04:00").getTime();
 
   if (now < sarahDepart) {
-    return "Rally point: ATL. Tess returns from the Philly side quest. Tay drives in from Chattanooga. Sarah prepares for DL1384.";
+    return "Rally point: ATL. Tess returns from the Philly side quest. Tay drives in from Chattanooga. Sarah prepares for DL1384. Katie remains on local standby with an open invitation should circumstances permit.";
   }
 
   if (now < sarahArrive) {
