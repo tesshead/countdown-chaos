@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tess's Countdown Chaos</title>
+  <meta name="description" content="A very serious countdown hub for deeply unserious events." />
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@500;700&family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <main class="shell">
+    <header class="topper">
+      <p class="eyebrow">✨ TESS'S TOTALLY ESSENTIAL COUNTDOWN HUB ✨</p>
+      <h1>Upcoming Chaos</h1>
+      <p class="subtitle">Currently tracking one highly important girls trip. Future nonsense may be added as needed.</p>
+    </header>
+
+    <section class="event-card" aria-label="Girls trip countdown">
+      <div class="event-copy">
+        <p class="badge">🌴 ACTIVE MISSION</p>
+        <h2 id="trip-title">Girls Trip Countdown</h2>
+        <p id="tagline">Hydration optional. Dramatic beach entrance mandatory.</p>
+      </div>
+
+      <div class="countdown" aria-live="polite">
+        <div class="time-card"><span id="days">--</span><small>days</small></div>
+        <div class="time-card"><span id="hours">--</span><small>hours</small></div>
+        <div class="time-card"><span id="minutes">--</span><small>minutes</small></div>
+        <div class="time-card"><span id="seconds">--</span><small>seconds</small></div>
+      </div>
+
+      <div class="status-card">
+        <p id="status">Calculating precisely how close we are to being insufferable near water...</p>
+      </div>
+
+      <div class="meter" aria-label="Hype level">
+        <div class="meter-label"><span>Beach Trip Hype Level</span><strong id="hype-label">FERAL</strong></div>
+        <div class="meter-track"><div id="hype-fill" class="meter-fill"></div></div>
+      </div>
+    </section>
+
+    <section class="extras">
+      <article>
+        <h3>Today’s official prophecy</h3>
+        <p id="prophecy"></p>
+      </article>
+      <article>
+        <h3>Pre-trip commandments</h3>
+        <ul>
+          <li>Thou shalt overpack swimwear.</li>
+          <li>Thou shalt send “what are we wearing” texts.</li>
+          <li>Thou shalt not pretend SPF 15 is enough.</li>
+          <li>Thou shalt romanticize every beverage with ice.</li>
+        </ul>
+      </article>
+    </section>
+  </main>
+
+  <script src="script.js"></script>
+</body>
+</html>
