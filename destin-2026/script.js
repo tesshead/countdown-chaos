@@ -42,9 +42,41 @@ const beachAlerts = [
   "BEACH ALERT * SOMEONE IS ABOUT TO ASK WHAT ARE WE WEARING *"
 ];
 
+// Update Tess later by replacing FLIGHT TBD with flight number/times and adding depart/arrive.
+const travelers = [
+  {
+    unit: "TESS",
+    route: "PHL -> ATL",
+    detail: "FLIGHT TBD",
+    status: "PHILLY SIDE QUEST ACTIVE"
+  },
+  {
+    unit: "TAY",
+    route: "CHA -> ATL",
+    detail: "CHAOS CHARIOT",
+    status: "PICKUP PROTOCOL PENDING"
+  },
+  {
+    unit: "SARAH",
+    route: "BUF -> ATL",
+    detail: "DL1384 12:16P-2:22P",
+    depart: "2026-08-06T12:16:00-04:00",
+    arrive: "2026-08-06T14:22:00-04:00",
+    status: "NORTHERN DELEGATION INBOUND"
+  },
+  {
+    unit: "ALL",
+    route: "ATL -> DESTIN",
+    detail: "AUG 6 BEACHWARD",
+    status: "AWAITING FULL GOBLIN ASSEMBLY"
+  }
+];
+
 const moodEl = document.getElementById("mood");
 const prophecyEl = document.getElementById("prophecy");
 const beachAlertEl = document.getElementById("beach-alert");
+const travelerBoard = document.getElementById("traveler-board");
+const missionReadout = document.getElementById("mission-readout");
 const emergencyMessage = document.getElementById("emergency-message");
 const fireworks = document.getElementById("fireworks");
 const beachButton = document.getElementById("beach-button");
@@ -67,6 +99,74 @@ function rotateCopy() {
 
 function rotateBeachAlert() {
   beachAlertEl.textContent = randomItem(beachAlerts);
+}
+
+function getTravelerStatus(traveler, now = Date.now()) {
+  if (!traveler.depart || !traveler.arrive) return traveler.status;
+
+  const depart = new Date(traveler.depart).getTime();
+  const arrive = new Date(traveler.arrive).getTime();
+
+  if (now < depart) return "AWAITING AIRPORT TRANSFORMATION";
+  if (now < arrive) return "AIRBORNE, SNACKS UNKNOWN";
+  return "LANDED IN ATL, CHAOS UNLOCKED";
+}
+
+function getAllStatus(now = Date.now()) {
+  const sarah = travelers.find((traveler) => traveler.unit === "SARAH");
+  const sarahArrive = new Date(sarah.arrive).getTime();
+  const augSixMorning = new Date("2026-08-06T08:00:00-04:00").getTime();
+
+  if (now < augSixMorning) return "CONVERGENCE PENDING";
+  if (now < sarahArrive) return "ATL RALLY POINT FORMING";
+  return "LOAD THE CAR. PROCEED BEACHWARD.";
+}
+
+function getMissionReadout(now = Date.now()) {
+  const sarahDepart = new Date("2026-08-06T12:16:00-04:00").getTime();
+  const sarahArrive = new Date("2026-08-06T14:22:00-04:00").getTime();
+
+  if (now < sarahDepart) {
+    return "Rally point: ATL. Tess returns from the Philly side quest. Tay drives in from Chattanooga. Sarah prepares for DL1384.";
+  }
+
+  if (now < sarahArrive) {
+    return "Sarah is airborne. Tay, this is not a drill. ATL acquisition protocol is active.";
+  }
+
+  return "ATL rally point unlocked. Acquire Tess. Acquire Sarah. Load the car and point the chaos toward Destin.";
+}
+
+function makeFlapCell(label, value, modifier = "") {
+  const cell = document.createElement("span");
+  cell.className = `flap-cell ${modifier}`.trim();
+  cell.dataset.label = label;
+  cell.setAttribute("role", "cell");
+  cell.textContent = value;
+  return cell;
+}
+
+function renderTravelerBoard() {
+  travelerBoard.textContent = "";
+
+  travelers.forEach((traveler) => {
+    const row = document.createElement("div");
+    row.className = "departures-row is-ticking";
+    row.setAttribute("role", "row");
+
+    const status = traveler.unit === "ALL" ? getAllStatus() : getTravelerStatus(traveler);
+    row.append(
+      makeFlapCell("Unit", traveler.unit),
+      makeFlapCell("Route", traveler.route, "flap-cell--route"),
+      makeFlapCell("Details", traveler.detail),
+      makeFlapCell("Status", status, "flap-cell--status")
+    );
+
+    travelerBoard.appendChild(row);
+    window.setTimeout(() => row.classList.remove("is-ticking"), 450);
+  });
+
+  missionReadout.textContent = getMissionReadout();
 }
 
 function updateCountdown() {
@@ -259,11 +359,13 @@ function declareBeachEmergency() {
 
 rotateCopy();
 rotateBeachAlert();
+renderTravelerBoard();
 loadDestinSurfVibe();
 updateCountdown();
 setInterval(updateCountdown, 1000);
 setInterval(rotateCopy, 10000);
 setInterval(rotateBeachAlert, 7000);
+setInterval(renderTravelerBoard, 60000);
 
 beachButton.addEventListener("click", declareBeachEmergency);
 document.addEventListener("click", (event) => {
