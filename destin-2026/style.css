@@ -191,6 +191,25 @@ h1 {
 .midi-controls {
   display: flex;
   gap: 8px;
+  align-items: center;
+}
+
+.midi-select-label {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  overflow: hidden;
+  clip: rect(0 0 0 0);
+}
+
+.midi-controls select {
+  min-height: 38px;
+  max-width: 210px;
+  border: 3px inset #8eefff;
+  background: #fff;
+  color: var(--ink);
+  font-weight: 900;
+  text-transform: uppercase;
 }
 
 .midi-controls button {
@@ -647,6 +666,12 @@ h1 {
 
   .midi-controls {
     justify-content: center;
+    flex-wrap: wrap;
+  }
+
+  .midi-controls select {
+    width: 100%;
+    max-width: none;
   }
 
   .departures-row--header {

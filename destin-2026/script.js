@@ -98,6 +98,7 @@ const surfFlag = document.getElementById("surf-flag");
 const surfStatus = document.getElementById("surf-status");
 const surfDetail = document.getElementById("surf-detail");
 const midiPlayer = document.querySelector(".midi-player");
+const midiTrackSelect = document.getElementById("midi-track");
 const midiPlayButton = document.getElementById("midi-play");
 const midiStopButton = document.getElementById("midi-stop");
 const midiTitle = document.getElementById("midi-title");
@@ -105,6 +106,7 @@ let currentBeachAlert = "";
 let midiContext = null;
 let midiLoopTimer = null;
 let midiIsPlaying = false;
+let audioTrack = null;
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -368,12 +370,31 @@ function stopMidiPlayer() {
     midiContext.close();
     midiContext = null;
   }
+  if (audioTrack) {
+    audioTrack.pause();
+    audioTrack.currentTime = 0;
+    audioTrack = null;
+  }
   midiPlayer.classList.remove("is-playing");
   midiTitle.textContent = "NOW PLAYING: LEGALLY DISTINCT PINA COLADA-ADJACENT BEACH MIDI";
 }
 
 function startMidiPlayer() {
   if (midiIsPlaying) return;
+
+  const selectedTrack = midiTrackSelect.value;
+  if (selectedTrack !== "generated") {
+    audioTrack = new Audio(selectedTrack);
+    audioTrack.loop = true;
+    audioTrack.play().then(() => {
+      midiIsPlaying = true;
+      midiPlayer.classList.add("is-playing");
+      midiTitle.textContent = `PLAYING: ${midiTrackSelect.options[midiTrackSelect.selectedIndex].text}`;
+    }).catch(() => {
+      midiTitle.textContent = "AUDIO DEVICE REFUSED THE BEACH ANTHEM.";
+    });
+    return;
+  }
 
   const AudioContext = window.AudioContext || window.webkitAudioContext;
   if (!AudioContext) {
@@ -479,6 +500,11 @@ setInterval(renderTravelerBoard, 60000);
 beachAlertEl.addEventListener("animationiteration", rotateBeachAlert);
 midiPlayButton.addEventListener("click", startMidiPlayer);
 midiStopButton.addEventListener("click", stopMidiPlayer);
+midiTrackSelect.addEventListener("change", () => {
+  const wasPlaying = midiIsPlaying;
+  stopMidiPlayer();
+  if (wasPlaying) startMidiPlayer();
+});
 beachButton.addEventListener("click", declareBeachEmergency);
 document.addEventListener("click", (event) => {
   if (event.target === beachButton) return;
