@@ -29,11 +29,28 @@ const statusMessages = [
   "IT IS GIRLS TRIP O'CLOCK. BE NORMAL? IMPOSSIBLE."
 ];
 
+const beachAlerts = [
+  "BEACH ALERT * SPF HAS ENTERED THE CHAT * FINANCIAL JUDGMENT NOT INVITED *",
+  "BEACH ALERT * EMOTIONAL SUPPORT SUNGLASSES ARE NOW MANDATORY *",
+  "BEACH ALERT * GROUP CHAT TEMPERATURE RISING * HYDRATION ALLEGEDLY PLANNED *",
+  "BEACH ALERT * OOO MESSAGE FORMING OFFSHORE *",
+  "BEACH ALERT * A BEACH CHAIR HAS REQUESTED OUR PRESENCE *",
+  "BEACH ALERT * PACKING LIST OPENED WAY TOO EARLY *",
+  "BEACH ALERT * SNACK LOGISTICS HAVE ENTERED THEIR FINAL FORM *",
+  "BEACH ALERT * CABANA DELUSIONS APPROACHING CRUISING ALTITUDE *",
+  "BEACH ALERT * THE VIBES ARE NON-REFUNDABLE *",
+  "BEACH ALERT * SOMEONE IS ABOUT TO ASK WHAT ARE WE WEARING *"
+];
+
 const moodEl = document.getElementById("mood");
 const prophecyEl = document.getElementById("prophecy");
+const beachAlertEl = document.getElementById("beach-alert");
 const emergencyMessage = document.getElementById("emergency-message");
 const fireworks = document.getElementById("fireworks");
 const beachButton = document.getElementById("beach-button");
+const surfFlag = document.getElementById("surf-flag");
+const surfStatus = document.getElementById("surf-status");
+const surfDetail = document.getElementById("surf-detail");
 
 function pad(value) {
   return String(value).padStart(2, "0");
@@ -46,6 +63,10 @@ function randomItem(items) {
 function rotateCopy() {
   moodEl.textContent = randomItem(moods);
   prophecyEl.textContent = randomItem(prophecies);
+}
+
+function rotateBeachAlert() {
+  beachAlertEl.textContent = randomItem(beachAlerts);
 }
 
 function updateCountdown() {
@@ -84,6 +105,79 @@ function calculateHype(daysUntilTrip, millisecondsUntilTrip) {
   if (daysUntilTrip > 14) return 78;
   if (daysUntilTrip > 7) return 90;
   return 98;
+}
+
+function parseMaxWind(windSpeed = "") {
+  const speeds = windSpeed.match(/\d+/g);
+  if (!speeds) return 0;
+  return Math.max(...speeds.map(Number));
+}
+
+function setSurfFlag(flag, status, detail) {
+  surfFlag.className = `surf-flag surf-flag--${flag}`;
+  surfStatus.textContent = status;
+  surfDetail.textContent = detail;
+}
+
+function getSurfReportFromForecast(period) {
+  const forecast = `${period.shortForecast || ""} ${period.detailedForecast || ""}`.toLowerCase();
+  const wind = parseMaxWind(period.windSpeed);
+
+  if (forecast.includes("thunder") || forecast.includes("storm")) {
+    return {
+      flag: "red",
+      status: "Red flag energy",
+      detail: `${period.temperature}°F, ${period.windSpeed}. Storm drama detected by Weather.gov.`
+    };
+  }
+
+  if (forecast.includes("rain") || forecast.includes("shower") || wind >= 18) {
+    return {
+      flag: "yellow",
+      status: "Yellow flag antics",
+      detail: `${period.temperature}°F, ${period.windSpeed}. Cute, but maybe secure the hat.`
+    };
+  }
+
+  if ((forecast.includes("sunny") || forecast.includes("clear")) && wind < 12) {
+    return {
+      flag: "green",
+      status: "Green flag for beach goblins",
+      detail: `${period.temperature}°F, ${period.windSpeed}. Weather.gov says the Gulf is being reasonably cooperative.`
+    };
+  }
+
+  return {
+    flag: "yellow",
+    status: "Proceed with SPF and suspicion",
+    detail: `${period.temperature}°F, ${period.windSpeed}. Forecast says: ${period.shortForecast}.`
+  };
+}
+
+function setFallbackSurfReport() {
+  const fallbackReports = [
+    ["green", "Green flag for delusion", "Weather.gov did not answer, so the unofficial department says: emotionally beachable."],
+    ["yellow", "Yellow flag for hat security", "Weather.gov did not answer. Hold onto your drink umbrella and proceed dramatically."],
+    ["purple", "Purple flag for mystery nonsense", "Weather.gov did not answer. Possible jellyfish? Possible vibes? Who can say."],
+    ["red", "Red flag for inbox exposure", "Weather.gov did not answer. Main hazard: still being expected to respond to emails."]
+  ];
+  setSurfFlag(...randomItem(fallbackReports));
+}
+
+async function loadDestinSurfVibe() {
+  try {
+    const pointsResponse = await fetch("https://api.weather.gov/points/30.3935,-86.4958");
+    if (!pointsResponse.ok) throw new Error("Weather point lookup failed");
+    const points = await pointsResponse.json();
+    const forecastResponse = await fetch(points.properties.forecast);
+    if (!forecastResponse.ok) throw new Error("Forecast lookup failed");
+    const forecast = await forecastResponse.json();
+    const currentPeriod = forecast.properties.periods[0];
+    const report = getSurfReportFromForecast(currentPeriod);
+    setSurfFlag(report.flag, report.status, report.detail);
+  } catch (error) {
+    setFallbackSurfReport();
+  }
 }
 
 function playBeachSound() {
@@ -164,9 +258,12 @@ function declareBeachEmergency() {
 }
 
 rotateCopy();
+rotateBeachAlert();
+loadDestinSurfVibe();
 updateCountdown();
 setInterval(updateCountdown, 1000);
 setInterval(rotateCopy, 10000);
+setInterval(rotateBeachAlert, 7000);
 
 beachButton.addEventListener("click", declareBeachEmergency);
 document.addEventListener("click", (event) => {

@@ -18,8 +18,8 @@
       <p class="eyebrow">Official girls trip operations dashboard</p>
       <h1>🌴 OPERATION: BEACH PLEASE 🌴</h1>
       <p class="subtitle">Days until the group chat becomes reality</p>
-      <div class="faux-marquee">
-        <span>BEACH ALERT * BEACH ALERT * SPF HAS ENTERED THE CHAT * FINANCIAL JUDGMENT NOT INVITED *</span>
+      <div class="faux-marquee" aria-label="Rotating beach alert">
+        <span id="beach-alert">BEACH ALERT * BEACH ALERT * SPF HAS ENTERED THE CHAT * FINANCIAL JUDGMENT NOT INVITED *</span>
       </div>
     </header>
 
@@ -56,6 +56,17 @@
           <div id="hype-fill" class="meter-fill"></div>
         </div>
         <p id="hype-percent" class="hype-percent">--%</p>
+      </article>
+
+      <article class="panel surf-panel">
+        <p class="panel-label">Destin Surf Vibe</p>
+        <div class="surf-widget">
+          <div id="surf-flag" class="surf-flag surf-flag--loading" aria-hidden="true"></div>
+          <div>
+            <p id="surf-status" class="surf-status">Checking the Gulf for drama...</p>
+            <p id="surf-detail" class="surf-detail">Unofficial beach flag department loading.</p>
+          </div>
+        </div>
       </article>
 
       <article class="panel badge-panel">
