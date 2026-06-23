@@ -24,9 +24,8 @@ body {
   font-family: "Trebuchet MS", Verdana, system-ui, sans-serif;
   background:
     repeating-linear-gradient(90deg, rgba(255,255,255,.18) 0 8px, transparent 8px 16px),
-    radial-gradient(circle at 12% 16%, #ffffff 0 0.7rem, transparent .75rem),
     linear-gradient(125deg, #ff74bd, #21d4fd, #fff269, #70ff91, #ff74bd);
-  background-size: auto, auto, 520% 520%;
+  background-size: auto, 520% 520%;
   animation: gradient-chaos 11s ease-in-out infinite;
   cursor: var(--beach-cursor);
   overflow-x: hidden;
